@@ -39,7 +39,7 @@ const Calculator = () => {
 
   //IMPERIAL BMI CALCULATION
   useEffect(() => {
-    if (ft > 2 && inch >= 0 && st >= 0 && lbs >= 0) {
+    if (ft > 2 && inch >= 0 && st >= 2 && lbs >= 0) {
       let heightInCms = ft * 30.48 + inch * 2.54;
       let weightInKg = st * 6.35 + lbs * 0.453592;
       let bmi = parseFloat(weightInKg / (heightInCms / 100) ** 2).toFixed(1);
@@ -67,7 +67,14 @@ const Calculator = () => {
         <div
           onClick={() => {
             setMetric(true);
-            setMetricResult(true);
+            setImperialResult(false);
+            setResult(true);
+            setCm("");
+            setKg("");
+            setFt("");
+            setSt("");
+            setLbs("");
+            setInch("");
           }}
           className="flex items-center justify-between w-[20%] mr-16"
         >
@@ -85,6 +92,13 @@ const Calculator = () => {
           onClick={() => {
             setMetric(false);
             setMetricResult(false);
+            setResult(true);
+            setCm("");
+            setKg("");
+            setFt("");
+            setSt("");
+            setLbs("");
+            setInch("");
           }}
           className="flex items-center justify-between w-[22%]"
         >
@@ -218,34 +232,61 @@ const Calculator = () => {
       )}
       {/*DEFAULT SUMMARY DIV ENDS */}
       {/* METRIC SUMMARY */}
-      {metricResult ||
-        (imperialResult && (
-          <div className="flex items-center justify-around w-[500px] p-4 rounded-tr-full rounded-br-full  bg-gradient-to-r from-[#345FF6] to-[#587DFF] mt-8">
-            <div className="flex flex-col">
-              <p className="font-inter font-semibold text-base leading-[150%] text-[#FFF]">
-                Your BMI is...
-              </p>
-              <h1 className="font-inter font-semibold text-[64px] leading-[110%] tracking-[-0.2rem] text-[#FFF]">
-                {BMI}
-              </h1>
-            </div>
-            <p className="font-inter text-[#FFF] text-sm leading-[150%] w-[50%]">
-              Your BMI suggests you’re{" "}
-              {BMI < 18.5 || BMI === 18.5
-                ? "underweight"
-                : BMI > 18.5 && BMI < 24.9
-                ? "normal weight"
-                : BMI > 24.9 && BMI <= 29.9
-                ? "overweight"
-                : "obese"}
-              . Your ideal weight is between{" "}
-              <span className="text-[16px] font-bold">
-                {lowerLimit} - {upperLimit}
-              </span>
+      {metricResult && (
+        <div className="flex items-center justify-around w-[500px] p-4 rounded-tr-full rounded-br-full  bg-gradient-to-r from-[#345FF6] to-[#587DFF] mt-8">
+          <div className="flex flex-col">
+            <p className="font-inter font-semibold text-base leading-[150%] text-[#FFF]">
+              Your BMI is...
             </p>
+            <h1 className="font-inter font-semibold text-[64px] leading-[110%] tracking-[-0.2rem] text-[#FFF]">
+              {BMI}
+            </h1>
           </div>
-        ))}
+          <p className="font-inter text-[#FFF] text-sm leading-[150%] w-[50%]">
+            Your BMI suggests you’re{" "}
+            {BMI < 18.5 || BMI === 18.5
+              ? "underweight"
+              : BMI > 18.5 && BMI < 24.9
+              ? "normal weight"
+              : BMI > 24.9 && BMI <= 29.9
+              ? "overweight"
+              : "obese"}
+            . Your ideal weight is between{" "}
+            <span className="text-[16px] font-bold">
+              {lowerLimit} - {upperLimit}
+            </span>
+          </p>
+        </div>
+      )}
       {/* METRIC SUMMARY ENDS */}
+      {/* IMPERIAL SUMMARY DIV */}
+      {imperialResult && (
+        <div className="flex items-center justify-around w-[500px] p-4 rounded-tr-full rounded-br-full  bg-gradient-to-r from-[#345FF6] to-[#587DFF] mt-8">
+          <div className="flex flex-col">
+            <p className="font-inter font-semibold text-base leading-[150%] text-[#FFF]">
+              Your BMI is...
+            </p>
+            <h1 className="font-inter font-semibold text-[64px] leading-[110%] tracking-[-0.2rem] text-[#FFF]">
+              {BMI}
+            </h1>
+          </div>
+          <p className="font-inter text-[#FFF] text-sm leading-[150%] w-[50%]">
+            Your BMI suggests you’re{" "}
+            {BMI < 18.5 || BMI === 18.5
+              ? "underweight"
+              : BMI > 18.5 && BMI < 24.9
+              ? "normal weight"
+              : BMI > 24.9 && BMI <= 29.9
+              ? "overweight"
+              : "obese"}
+            . Your ideal weight is between{" "}
+            <span className="text-[16px] font-bold">
+              {lowerLimit} - {upperLimit}
+            </span>
+          </p>
+        </div>
+      )}
+      {/* IMPERIAL SUMMARY DIV ENDS */}
     </div>
   );
 };

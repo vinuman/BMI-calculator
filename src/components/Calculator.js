@@ -9,10 +9,10 @@ const Calculator = () => {
   const [kg, setKg] = useState("");
   const [metricResult, setMetricResult] = useState(false);
 
-  const [ft, setFt] = useState(0);
-  const [inch, setInch] = useState(0);
-  const [st, setSt] = useState(0);
-  const [lbs, setLbs] = useState(0);
+  const [ft, setFt] = useState("");
+  const [inch, setInch] = useState("");
+  const [st, setSt] = useState("");
+  const [lbs, setLbs] = useState("");
   const [imperialResult, setImperialResult] = useState(false);
 
   const [result, setResult] = useState(true);
@@ -20,8 +20,9 @@ const Calculator = () => {
   const [lowerLimit, setLowerLimit] = useState("");
   const [upperLimit, setUpperLimit] = useState("");
 
+  //METRIC BMI CALCULATION
   useEffect(() => {
-    if (cm > 0 && kg > 0) {
+    if (cm > 50 && kg > 10) {
       let heightInMeters = cm / 100;
       let heightInMetersSquare = heightInMeters * heightInMeters;
       let bmi = kg / heightInMetersSquare;
@@ -36,12 +37,24 @@ const Calculator = () => {
     }
   }, [cm, kg]);
 
+  //IMPERIAL BMI CALCULATION
   useEffect(() => {
-    if (ft > 0 && inch > 0 && lbs > 0 && st > 0) {
+    if (ft > 2 && inch >= 0 && st >= 0 && lbs >= 0) {
+      let heightInCms = ft * 30.48 + inch * 2.54;
+      let weightInKg = st * 6.35 + lbs * 0.453592;
+      let bmi = parseFloat(weightInKg / (heightInCms / 100) ** 2).toFixed(1);
+      let lowerBoundKg = ((heightInCms / 100) ** 2 * 18.5).toFixed(1);
+      let upperBoundKg = ((heightInCms / 100) ** 2 * 24.9).toFixed(1);
+      let lowerBoundSt = (lowerBoundKg / 6.35).toFixed(1);
+      let upperBoundSt = (upperBoundKg / 6.35).toFixed(1);
+      setBMI(bmi);
+      setLowerLimit(lowerBoundSt);
+      setUpperLimit(upperBoundSt);
       setImperialResult(true);
       setResult(false);
     }
   }, [ft, inch, st, lbs]);
+
   return (
     <div
       className={`flex flex-col p-8 border rounded-lg bg-[#FFF] shadow-[16px 32px 56px 0px rgba(143, 174, 207, 0.25)]`}
@@ -52,7 +65,10 @@ const Calculator = () => {
       {/*  RADIO BUTTON DIV */}
       <div className="flex w-[100%] pb-8">
         <div
-          onClick={() => setMetric(true)}
+          onClick={() => {
+            setMetric(true);
+            setMetricResult(true);
+          }}
           className="flex items-center justify-between w-[20%] mr-16"
         >
           {metric ? (
@@ -66,7 +82,10 @@ const Calculator = () => {
           </p>
         </div>
         <div
-          onClick={() => setMetric(false)}
+          onClick={() => {
+            setMetric(false);
+            setMetricResult(false);
+          }}
           className="flex items-center justify-between w-[22%]"
         >
           {!metric ? (
@@ -131,6 +150,10 @@ const Calculator = () => {
                 className="flex p-4 items-start gap-24 self-stretch rounded-lg border border-[#D8E2E7] bg-[#FFF]"
                 type="number"
                 placeholder="0"
+                onChange={(e) => {
+                  setFt(e.target.value);
+                }}
+                value={ft}
               ></input>
               <div className="absolute right-3 bottom-4 font-inter font-semibold text-xl leading-normal tracking-[0.03em] text-[#345FF6]">
                 in
@@ -139,6 +162,10 @@ const Calculator = () => {
                 className="flex p-4 items-start gap-24 self-stretch rounded-lg border border-[#D8E2E7] bg-[#FFF]"
                 type="number"
                 placeholder="0"
+                onChange={(e) => {
+                  setInch(e.target.value);
+                }}
+                value={inch}
               ></input>
             </div>
           </div>
@@ -154,6 +181,10 @@ const Calculator = () => {
                 className="flex p-4 items-start gap-24 self-stretch rounded-lg border border-[#D8E2E7] bg-[#FFF]"
                 type="number"
                 placeholder="0"
+                onChange={(e) => {
+                  setSt(e.target.value);
+                }}
+                value={st}
               ></input>
               <div className="absolute right-3 bottom-4 font-inter font-semibold text-xl leading-normal tracking-[0.03em] text-[#345FF6]">
                 lbs
@@ -162,6 +193,10 @@ const Calculator = () => {
                 className="flex p-4 items-start gap-24 self-stretch rounded-lg border border-[#D8E2E7] bg-[#FFF]"
                 type="number"
                 placeholder="0"
+                onChange={(e) => {
+                  setLbs(e.target.value);
+                }}
+                value={lbs}
               ></input>
             </div>
           </div>
@@ -183,32 +218,33 @@ const Calculator = () => {
       )}
       {/*DEFAULT SUMMARY DIV ENDS */}
       {/* METRIC SUMMARY */}
-      {metricResult && (
-        <div className="flex items-center justify-around w-[500px] p-4 rounded-tr-full rounded-br-full  bg-gradient-to-r from-[#345FF6] to-[#587DFF] mt-8">
-          <div className="flex flex-col">
-            <p className="font-inter font-semibold text-base leading-[150%] text-[#FFF]">
-              Your BMI is...
+      {metricResult ||
+        (imperialResult && (
+          <div className="flex items-center justify-around w-[500px] p-4 rounded-tr-full rounded-br-full  bg-gradient-to-r from-[#345FF6] to-[#587DFF] mt-8">
+            <div className="flex flex-col">
+              <p className="font-inter font-semibold text-base leading-[150%] text-[#FFF]">
+                Your BMI is...
+              </p>
+              <h1 className="font-inter font-semibold text-[64px] leading-[110%] tracking-[-0.2rem] text-[#FFF]">
+                {BMI}
+              </h1>
+            </div>
+            <p className="font-inter text-[#FFF] text-sm leading-[150%] w-[50%]">
+              Your BMI suggests you’re{" "}
+              {BMI < 18.5 || BMI === 18.5
+                ? "underweight"
+                : BMI > 18.5 && BMI < 24.9
+                ? "normal weight"
+                : BMI > 24.9 && BMI <= 29.9
+                ? "overweight"
+                : "obese"}
+              . Your ideal weight is between{" "}
+              <span className="text-[16px] font-bold">
+                {lowerLimit} - {upperLimit}
+              </span>
             </p>
-            <h1 className="font-inter font-semibold text-[64px] leading-[110%] tracking-[-0.2rem] text-[#FFF]">
-              {BMI}
-            </h1>
           </div>
-          <p className="font-inter text-[#FFF] text-sm leading-[150%] w-[50%]">
-            Your BMI suggests you’re{" "}
-            {BMI < 18.5 || BMI === 18.5
-              ? "underweight"
-              : BMI > 18.5 && BMI < 24.9
-              ? "normal weight"
-              : BMI > 24.9 && BMI <= 29.9
-              ? "overweight"
-              : "obese"}
-            . Your ideal weight is between{" "}
-            <span className="text-[16px] font-bold">
-              {lowerLimit} - {upperLimit}
-            </span>
-          </p>
-        </div>
-      )}
+        ))}
       {/* METRIC SUMMARY ENDS */}
     </div>
   );

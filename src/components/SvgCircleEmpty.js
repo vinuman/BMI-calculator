@@ -7,7 +7,7 @@ const SvgComponent = (props) => (
     fill="none"
     {...props}
   >
-    <circle cx={15.5} cy={15.5} r={15} fill="#fff" stroke="#345FF6" />
+    <circle cx={15.5} cy={15.5} r={13} fill="#fff" stroke="#345FF6" />
   </svg>
 );
 export default SvgComponent;

@@ -24,7 +24,7 @@ const Home = () => {
         </div>
         {/* RIGHT */}
       </section>
-      <div className="absolute top-10 left-[650px] rounded-[16px] bg-white">
+      <div className="absolute top-10 left-[650px] rounded-[16px] bg-white shadow-[16px 32px 56px 0px rgba(143, 174, 207, 0.25)]">
         <Calculator />
       </div>
     </div>

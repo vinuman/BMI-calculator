@@ -16,9 +16,21 @@ const Calculator = () => {
   const [imperialResult, setImperialResult] = useState(false);
 
   const [result, setResult] = useState(true);
+  const [BMI, setBMI] = useState("");
+  const [lowerLimit, setLowerLimit] = useState("");
+  const [upperLimit, setUpperLimit] = useState("");
 
   useEffect(() => {
     if (cm > 0 && kg > 0) {
+      let heightInMeters = cm / 100;
+      let heightInMetersSquare = heightInMeters * heightInMeters;
+      let bmi = kg / heightInMetersSquare;
+      let formattedBmi = parseFloat(bmi).toFixed(1);
+      let lowerBound = parseFloat(18.5 * heightInMetersSquare).toFixed(1);
+      let upperBound = parseFloat(24.9 * heightInMetersSquare).toFixed(1);
+      setLowerLimit(lowerBound);
+      setUpperLimit(upperBound);
+      setBMI(formattedBmi);
       setMetricResult(true);
       setResult(false);
     }
@@ -178,12 +190,22 @@ const Calculator = () => {
               Your BMI is...
             </p>
             <h1 className="font-inter font-semibold text-[64px] leading-[110%] tracking-[-0.2rem] text-[#FFF]">
-              23.4
+              {BMI}
             </h1>
           </div>
           <p className="font-inter text-[#FFF] text-sm leading-[150%] w-[50%]">
-            Your BMI suggests you’re a healthy weight. Your ideal weight is
-            between 63.3kgs - 85.2kgs.
+            Your BMI suggests you’re{" "}
+            {BMI < 18.5 || BMI === 18.5
+              ? "underweight"
+              : BMI > 18.5 && BMI < 24.9
+              ? "normal weight"
+              : BMI > 24.9 && BMI <= 29.9
+              ? "overweight"
+              : "obese"}
+            . Your ideal weight is between{" "}
+            <span className="text-[16px] font-bold">
+              {lowerLimit} - {upperLimit}
+            </span>
           </p>
         </div>
       )}

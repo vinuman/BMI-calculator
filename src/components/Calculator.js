@@ -57,7 +57,7 @@ const Calculator = () => {
 
   return (
     <div
-      className={`flex flex-col p-8 border rounded-lg bg-[#FFF] shadow-[16px 32px 56px 0px rgba(143, 174, 207, 0.25)]`}
+      className={`flex flex-col p-8 border rounded-lg bg-[#FFF] shadow-[16px 32px 56px 0px rgba(143, 174, 207, 0.25)] w-[90%] mx-auto mt-4`}
     >
       <h2 className="font-inter font-semibold text-2xl leading-normal tracking-[0.03em] pb-8">
         Enter your details below
@@ -238,7 +238,7 @@ const Calculator = () => {
             <p className="font-inter font-semibold text-base leading-[150%] text-[#FFF]">
               Your BMI is...
             </p>
-            <h1 className="font-inter font-semibold text-[64px] leading-[110%] tracking-[-0.2rem] text-[#FFF]">
+            <h1 className="font-inter font-semibold md:text-[64px] text-[48px] leading-[110%] tracking-[-0.2rem] text-[#FFF]">
               {BMI}
             </h1>
           </div>

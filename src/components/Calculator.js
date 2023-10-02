@@ -76,7 +76,7 @@ const Calculator = () => {
             setLbs("");
             setInch("");
           }}
-          className="flex items-center justify-between w-[20%] mr-16"
+          className="flex items-center gap-8 lg:justify-between w-[20%] mr-16"
         >
           {metric ? (
             <SvgFilled className="cursor-pointer" />
@@ -100,7 +100,7 @@ const Calculator = () => {
             setLbs("");
             setInch("");
           }}
-          className="flex items-center justify-between w-[22%]"
+          className="flex items-center gap-8 lg:justify-between w-[22%]"
         >
           {!metric ? (
             <SvgFilled className="cursor-pointer" />
@@ -238,7 +238,7 @@ const Calculator = () => {
             <p className="font-inter font-semibold text-base leading-[150%] text-[#FFF]">
               Your BMI is...
             </p>
-            <h1 className="font-inter font-semibold md:text-[64px] text-[48px] leading-[110%] tracking-[-0.2rem] text-[#FFF]">
+            <h1 className="font-inter font-semibold lg:text-[64px] text-[48px] leading-[110%] tracking-[-0.2rem] text-[#FFF]">
               {BMI}
             </h1>
           </div>

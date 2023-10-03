@@ -57,13 +57,13 @@ const Calculator = () => {
 
   return (
     <div
-      className={`flex flex-col p-8 border rounded-lg bg-[#FFF] shadow-[16px 32px 56px 0px rgba(143, 174, 207, 0.25)] w-[90%] mx-auto mt-4`}
+      className={`flex flex-col p-8 rounded-lg bg-[#FFF] shadow-lg mx-auto mt-4`}
     >
       <h2 className="font-inter font-semibold text-2xl leading-normal tracking-[0.03em] pb-8">
         Enter your details below
       </h2>
       {/*  RADIO BUTTON DIV */}
-      <div className="flex w-[100%] pb-8">
+      <div className="flex w-[100%] pb-8 items-center">
         <div
           onClick={() => {
             setMetric(true);
@@ -76,7 +76,7 @@ const Calculator = () => {
             setLbs("");
             setInch("");
           }}
-          className="flex items-center gap-8 lg:justify-between w-[20%] mr-16"
+          className="flex items-center lg:justify-between w-[20%] mr-16"
         >
           {metric ? (
             <SvgFilled className="cursor-pointer" />
@@ -84,7 +84,7 @@ const Calculator = () => {
             <SvgEmpty className="cursor-pointer" />
           )}
 
-          <p className="font-inter font-semibold text-base leading-[150%]">
+          <p className="font-inter font-semibold text-base leading-[150%] ">
             Metric
           </p>
         </div>
@@ -100,7 +100,7 @@ const Calculator = () => {
             setLbs("");
             setInch("");
           }}
-          className="flex items-center gap-8 lg:justify-between w-[22%]"
+          className="flex items-center lg:justify-between w-[22%]"
         >
           {!metric ? (
             <SvgFilled className="cursor-pointer" />

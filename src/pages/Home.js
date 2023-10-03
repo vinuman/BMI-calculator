@@ -28,7 +28,7 @@ const Home = () => {
         {/* RIGHT */}
       </section>
       {/*  TOP SECTION ENDS */}
-      <div className="md:absolute md:top-10 md:left-[650px] rounded-[16px] bg-white shadow-[16px 32px 56px 0px rgba(143, 174, 207, 0.25)]">
+      <div className="md:absolute md:top-10 md:left-[650px] rounded-[16px] bg-white shadow-lg">
         <Calculator />
       </div>
       {/* MIDDLE SECTION DIV */}

@@ -57,13 +57,13 @@ const Calculator = () => {
 
   return (
     <div
-      className={`flex flex-col p-8 rounded-lg bg-[#FFF] shadow-lg mx-auto mt-4`}
+      className={`flex flex-col lg:p-8 p-4 rounded-lg bg-[#FFF] shadow-lg mx-auto mt-4`}
     >
       <h2 className="font-inter font-semibold text-2xl leading-normal tracking-[0.03em] pb-8">
         Enter your details below
       </h2>
       {/*  RADIO BUTTON DIV */}
-      <div className="flex w-[100%] pb-8 items-center">
+      <div className="flex w-[100%] p-4 items-center">
         <div
           onClick={() => {
             setMetric(true);
@@ -76,7 +76,7 @@ const Calculator = () => {
             setLbs("");
             setInch("");
           }}
-          className="flex items-center lg:justify-between w-[20%] mr-16"
+          className="flex items-center justify-around lg:w-[20%] w-[40%] mr-16 "
         >
           {metric ? (
             <SvgFilled className="cursor-pointer" />
@@ -100,7 +100,7 @@ const Calculator = () => {
             setLbs("");
             setInch("");
           }}
-          className="flex items-center lg:justify-between w-[22%]"
+          className="flex items-center justify-around lg:w-[23%] w-[40%] mr-16 "
         >
           {!metric ? (
             <SvgFilled className="cursor-pointer" />
@@ -124,7 +124,7 @@ const Calculator = () => {
               cm
             </div>
             <input
-              className="flex p-4 items-start gap-24 self-stretch rounded-lg border border-[#D8E2E7] bg-[#FFF]"
+              className="flex p-4 items-start self-stretch rounded-lg border border-[#D8E2E7] bg-[#FFF] w-[100%]"
               type="number"
               placeholder="0"
               onChange={(e) => setCm(e.target.value)}
@@ -139,7 +139,7 @@ const Calculator = () => {
               kg
             </div>
             <input
-              className="flex p-4 items-start gap-24 self-stretch rounded-lg border border-[#D8E2E7] bg-[#FFF]"
+              className="flex p-4 items-start gap-24 self-stretch rounded-lg border border-[#D8E2E7] bg-[#FFF] w-[100%]"
               type="number"
               placeholder="0"
               value={kg}
@@ -157,11 +157,11 @@ const Calculator = () => {
               Height
             </p>
             <div className="flex  justify-between">
-              <div className="absolute left-[180px] bottom-4 font-inter font-semibold text-xl leading-normal tracking-[0.03em] text-[#345FF6]">
+              <div className="absolute left-[160px] bottom-4 font-inter font-semibold text-xl leading-normal tracking-[0.03em] text-[#345FF6]">
                 ft
               </div>
               <input
-                className="flex p-4 items-start gap-24 self-stretch rounded-lg border border-[#D8E2E7] bg-[#FFF]"
+                className="flex p-4 items-start lg:gap-24 self-stretch rounded-lg border border-[#D8E2E7] bg-[#FFF] w-[120%] lg:w-[40%]"
                 type="number"
                 placeholder="0"
                 onChange={(e) => {
@@ -173,7 +173,7 @@ const Calculator = () => {
                 in
               </div>
               <input
-                className="flex p-4 items-start gap-24 self-stretch rounded-lg border border-[#D8E2E7] bg-[#FFF]"
+                className="flex p-4 items-start lg:gap-24 self-stretch rounded-lg border border-[#D8E2E7] bg-[#FFF] w-[100%] lg:w-[40%]"
                 type="number"
                 placeholder="0"
                 onChange={(e) => {
@@ -188,11 +188,11 @@ const Calculator = () => {
               Weight
             </p>
             <div className="flex  justify-between">
-              <div className="absolute left-[180px] bottom-4 font-inter font-semibold text-xl leading-normal tracking-[0.03em] text-[#345FF6]">
+              <div className="absolute left-[160px] bottom-4 font-inter font-semibold text-xl leading-normal tracking-[0.03em] text-[#345FF6]">
                 st
               </div>
               <input
-                className="flex p-4 items-start gap-24 self-stretch rounded-lg border border-[#D8E2E7] bg-[#FFF]"
+                className="flex p-4 items-start gap-24 self-stretch rounded-lg border border-[#D8E2E7] bg-[#FFF] w-[120%] lg:w-[40%]"
                 type="number"
                 placeholder="0"
                 onChange={(e) => {
@@ -204,7 +204,7 @@ const Calculator = () => {
                 lbs
               </div>
               <input
-                className="flex p-4 items-start gap-24 self-stretch rounded-lg border border-[#D8E2E7] bg-[#FFF]"
+                className="flex p-4 items-start gap-24 self-stretch rounded-lg border border-[#D8E2E7] bg-[#FFF] w-[100%] lg:w-[40%]"
                 type="number"
                 placeholder="0"
                 onChange={(e) => {
@@ -219,7 +219,7 @@ const Calculator = () => {
       {/* IMPERIAL INPUT DIV ENDS */}
       {/* DEFAULT SUMMARY DIV */}
       {result && (
-        <div className="flex flex-col w-[500px] justify-center items-center p-8 gap-24 self-stretch rounded-tr-full rounded-br-full  bg-gradient-to-r from-[#345FF6] to-[#587DFF] mt-8">
+        <div className="flex flex-col lg:w-[500px] justify-center items-center p-8 gap-24 self-stretch rounded-tr-full rounded-br-full  bg-gradient-to-r from-[#345FF6] to-[#587DFF] mt-8">
           <div>
             <h3 className="font-inter font-semibold text-xl leading-normal tracking-[0.03em] text-[#FFF] pb-4">
               Welcome!
